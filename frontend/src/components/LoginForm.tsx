@@ -6,9 +6,11 @@ import {
     CardTitle,
   } from "@/components/ui/card"
   import { Mail,Lock,GraduationCap} from 'lucide-react';
+  import { useNavigate } from "@tanstack/react-router";
 
   import { Button } from "@/components/ui/button"
  const LoginForm=()=>{
+    const navigate=useNavigate();
 return(
     <div className="flex flex-col justify-center items-center h-screen gap-4">
     <Card className="w-[500px]">
@@ -31,9 +33,8 @@ return(
                 <label htmlFor="password">Password</label>
                 <input type="password" placeholder="password" className="border border-gray-300 bg-muted rounded-md p-2"/>
                 </div>
-            <Button className="w-full bg-blue-500 text-white py-2 rounded-md mt-6">Sign In</Button>
+            <Button className="w-full bg-blue-500 text-white py-2 rounded-md mt-6" onClick={()=>navigate({to:"/studentdashboard"})}>Sign In</Button>
         </CardContent>
-        
     </Card>
     </div>
 )
