@@ -1,9 +1,11 @@
-import { GraduationCap } from 'lucide-react';
+import { GraduationCap, LogOut } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { useNavigate } from '@tanstack/react-router';
 
 const Header=()=>{
+    const navigate=useNavigate();
     return(
-        <div className="flex flex-row items-center w-screen justify-between h-20 border border-b-2 shadow-md border-muted">
+        <div className="flex flex-row sticky top-0 z-50 bg-white items-center w-screen justify-between h-20 border border-b-2 shadow-md border-muted">
             <div className="flex flex-row gap-4 ml-15">
             <div className='flex items-center justify-center bg-blue-500 mt-1 w-10 h-10 rounded-md p-2'>
             <GraduationCap className=" text-white"/>
@@ -13,10 +15,13 @@ const Header=()=>{
             <p className="text-sm text-muted-foreground">Education Financing</p>
             </div>
             </div>
+            <div className="flex flex-row  mr-15 items-center">
             <Avatar className="w-12 h-12 mr-15">
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>SC</AvatarFallback>
             </Avatar>
+            <LogOut className="w-7 h-7 mr-15 hover:cursor-pointer" onClick={()=>{navigate({to:"/"})}} />
+            </div>
         </div>
     )
 }
