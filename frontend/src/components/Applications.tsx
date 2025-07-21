@@ -1,36 +1,9 @@
 import { Calendar, DollarSign, GraduationCap } from "lucide-react"
 import {Card,CardContent,CardHeader,CardTitle,CardDescription} from "./ui/card"
 import { Badge } from "./ui/badge"
+import {useGetApplication} from "../hooks/useGetApplication"
 
-const mockApplications=[
-    {
-        title:"Tuition Fees",
-        status:"Approved",
-        amount:10000,
-        variant:"warning",
-        university:"Stanford University",
-        course:"Computer Science",
-        date:"Jan 15, 2025"
-    },
-    {
-        title:"Living Expenses",
-        status:"Pending",
-        amount:10000,
-        variant:"warning",
-        university:"Harvard University",
-        course:"Business",
-        date:"Feb 2 2025"
-    },
-    {
-        title:"Tuition Fees",
-        status:"Rejected",
-        variant:"destructive",
-        amount:10000,
-        university:"MIT",
-        course:"Mathematics",
-        date:"Mar 14 2025"
-    }
-]
+
 const statusToVariant = (status: string): 
   "default" | "secondary" | "success" | "warning" | "destructive" => {
   switch (status.toLowerCase()) {
@@ -46,15 +19,15 @@ const statusToVariant = (status: string):
 };
 
 const Applications=()=>{
+    const {data:mockApplications,error,isLoading}=useGetApplication()
     return(
         <>
-        
         <Card className="mx-8 border border-b-1 shadow-lg">
             <CardHeader>
                 <CardTitle className="text-xl font-semibold">Your Applications</CardTitle>
             </CardHeader>
             <CardContent>
-            {mockApplications.map((application,index)=>(
+            {mockApplications?.map((application:any,index:any)=>(
                 <Card key={index} className="my-4 hover:shadow-lg hover:cursor-pointer">
                     <CardHeader>
                         <CardTitle className="flex flex-row justify-start gap-2 items-center">

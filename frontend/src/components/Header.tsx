@@ -15,12 +15,12 @@ const Header=()=>{
             <p className="text-sm text-muted-foreground">Education Financing</p>
             </div>
             </div>
-            <div className="flex flex-row  mr-15 items-center">
-            <Avatar className="w-12 h-12 mr-15">
+            <div className="flex flex-row items-center justify-end mr-15 gap-6">
+            <Avatar className="w-10 h-10">
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>SC</AvatarFallback>
             </Avatar>
-            <LogOut className="w-7 h-7 mr-15 hover:cursor-pointer" onClick={()=>{navigate({to:"/"})}} />
+            <LogOut className="w-5 h-5 hover:cursor-pointer" onClick={()=>{navigate({to:"/"})}} />
             </div>
         </div>
     )

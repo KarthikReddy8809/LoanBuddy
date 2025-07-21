@@ -31,6 +31,7 @@ type FormData=z.infer<typeof schema>
        if(response.token){
         navigate({to:"/studentdashboard"})
         toast.success("Login successful")
+        localStorage.setItem("token",response.token)
        }
        else{
         toast.error("Invalid credentials")

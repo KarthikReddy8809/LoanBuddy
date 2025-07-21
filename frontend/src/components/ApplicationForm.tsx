@@ -7,10 +7,11 @@ import {Input} from "./ui/input"
 import {Button} from "./ui/button"
 const ApplicationForm = () => {
     const schema = z.object({
-        Firstname: z.string().min(3, "Name must be at least 3 characters long"),
-        Lastname:z.string().min(3,"Name must be at least 3 characters long"),
-        Course:z.string().min(3,"Name must be at least 3 characters long"),
-        University:z.string().min(3,"Name must be at least 3 characters long"),
+        Firstname: z.string().min(3, "FirsrName must be at least 3 characters long"),
+        Lastname:z.string().min(3,"Last Name must be at least 3 characters long"),
+        title:z.string().min(3,"Title must be at least 3 characters long"),
+        Course:z.string().min(3,"Course must be at least 3 characters long"),
+        University:z.string().min(3,"University must be at least 3 characters long"),
         GPA:z.number().min(3,"GPA must be a number"),
         Income:z.number().min(3,"Income must be a number"),
         LoanAmount:z.number().min(3,"Loan Amount must be a number"),
@@ -56,10 +57,17 @@ const ApplicationForm = () => {
             {errors.University && <p className="text-red-500">{errors.University.message}</p>}
           </div>
           </div>
+          <div className="flex flex-row gap-2 justify-between">
           <div className="flex flex-col gap-2">
             <label htmlFor="gpa" className="text-black">GPA</label>
             <Input type="text" className="shadow-sm" {...register("GPA")} />
             {errors.GPA && <p className="text-red-500">{errors.GPA.message}</p>}
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="title" className="text-black">Title</label>
+            <Input type="text" className="shadow-sm" {...register("title")} />
+            {errors.title && <p className="text-red-500">{errors.title.message}</p>}
+          </div>
           </div>
           <div className="flex flex-row gap-2 justify-between">
           <div className="flex flex-col gap-2">
