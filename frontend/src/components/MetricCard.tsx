@@ -35,7 +35,7 @@ const MetricCard=({title,value,variant,icon,description}:Metriccardprops)=>{
       };
       const Icon = icon;
     return(
-            <Card className={`w-[300px] flex flex-col shadow-md border-0 border-b-1 ${getVariantStyles()}`}>
+            <Card className={`w-[300px] flex flex-col shadow-md border border-2 ${getVariantStyles()}`}>
                 <CardTitle className=" flex flex-row justify-between text-muted-foreground font-bold ml-5">
                     {title}
                     <span className="mr-5">{Icon && <Icon className={`w-4 h-4 ${getVariantText()}`}/>}</span>
