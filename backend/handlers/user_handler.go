@@ -16,8 +16,7 @@ import (
 )
 
 type Handler struct {
-	StudentCollection        *mongo.Collection
-	GetNextSequenceValueFunc func(key string) (int64, error)
+	StudentCollection *mongo.Collection
 }
 
 func NewHandler(studentCollection *mongo.Collection) *Handler {
@@ -55,13 +54,13 @@ func (h *Handler) GenerateApplicationNumber(seq int64) string {
 }
 func (h *Handler) LoanApplications(w http.ResponseWriter, r *http.Request) {
 	var student model.StudentDetails
-
 	err := json.NewDecoder(r.Body).Decode(&student)
 	if err != nil {
 		http.Error(w, "Invalid JSON", http.StatusBadRequest)
 		return
 	}
-	seq, err := h.GetNextSequenceValueFunc("applicationnumber")
+	fmt.Println("studentdetails", student)
+	seq, err := h.GetNextSequenceValue("applicationnumber")
 	if err != nil {
 		http.Error(w, "Failed to generate application number", http.StatusInternalServerError)
 		return
@@ -121,4 +120,32 @@ func (h *Handler) GetLoanApplicationById(w http.ResponseWriter, r *http.Request)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(document)
+}
+
+func (h *Handler) GetApplicationsStats(w http.ResponseWriter, r *http.Request) {
+	totalApplications, err := h.StudentCollection.CountDocuments(context.Background(), bson.M{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	pendingApplications, err := h.StudentCollection.CountDocuments(context.Background(), bson.M{"status": "pending"})
+	if err != nil {
+		log.Fatal(err)
+	}
+	approvedApplications, err := h.StudentCollection.CountDocuments(context.Background(), bson.M{"status": "approved"})
+	if err != nil {
+		log.Fatal(err)
+	}
+	rejectedApplications, err := h.StudentCollection.CountDocuments(context.Background(), bson.M{"status": "rejected"})
+	if err != nil {
+		log.Fatal(err)
+	}
+	stats := model.ApplicationStats{
+		TotalApplications: int(totalApplications),
+		Pending:           int(pendingApplications),
+		Approved:          int(approvedApplications),
+		Rejected:          int(rejectedApplications),
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(stats)
+
 }

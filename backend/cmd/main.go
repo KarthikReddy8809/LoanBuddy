@@ -33,6 +33,7 @@ func main() {
 	r.Post("/loan", h.LoanApplications)
 	r.Get("/loan-applications", h.GetLoanApplications)
 	r.Get("/loan-application/{applicationnumber}", h.GetLoanApplicationById)
+	r.Get("/stats", h.GetApplicationsStats)
 
 	http.ListenAndServe(":8080", r)
 }

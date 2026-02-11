@@ -22,3 +22,10 @@ type StudentDetails struct {
 	PurposeOfLoan      string `json:"purposeofloan" bson:"purposeofloan"`
 	Status             string `json:"status" bson:"status"`
 }
+
+type ApplicationStats struct {
+	TotalApplications int `json:"totalapplications"`
+	Pending           int `json:"pending"`
+	Approved          int `json:"approved"`
+	Rejected          int `json:"rejected"`
+}
