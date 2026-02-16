@@ -1,10 +1,10 @@
-
+import Stats from "./components/stats";
 function App() {
-
   return (
-    <>
-    <h1 className='text-green-500'>Hello World</h1>
-    </>
+    <div className="flex flex-col gap-4 p-4">
+    <h1 className="text-xl font-bold">Welcome Admin</h1>
+    <Stats />
+    </div>
   )
 }
 

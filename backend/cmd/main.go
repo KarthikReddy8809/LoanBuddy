@@ -7,11 +7,11 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
-	handler "main.go/handlers"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	handler "main.go/handlers"
+	middleware "main.go/middleware"
 )
 
 var studentCollection *mongo.Collection
@@ -26,7 +26,7 @@ func main() {
 	log.Println("connected to mongodb")
 	h := handler.NewHandler(studentCollection)
 	r := chi.NewRouter()
-	r.Use(middleware.Logger)
+	r.Use(middleware.CORSMiddleware)
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello world"))
 	})
