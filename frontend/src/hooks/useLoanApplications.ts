@@ -18,7 +18,21 @@ export const useLoanApplications = () =>{
             
         })
     }
+    const useGetLoanApplications = ()=>{
+        return useQuery({
+            queryKey: ['loanapplications'],
+            queryFn: async () =>{
+               const res= await fetch("http://localhost:8080/loan-applications",{
+                    method:"GET"
+                })
+                const data = await res.json();
+                return data;
+            },
+            initialData:[]
+        })
+    }
     return {
-        useGetStats
+        useGetStats,
+        useGetLoanApplications
     }
 }

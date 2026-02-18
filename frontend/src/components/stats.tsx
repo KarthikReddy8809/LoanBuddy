@@ -16,7 +16,7 @@ export default function Stats(){
         }
     },[data])    
     return(
-        <div className="flex flex-row items-center justify-between gap-4">
+        <div className="flex flex-row items-center justify-between gap-4 ">
            <Card className="w-full max-w-md p-4">
             <div className="flex flex-row items-center justify-between">
             <h1 className="font-semibold">Total Applications</h1>
